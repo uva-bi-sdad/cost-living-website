@@ -2,9 +2,25 @@
 title: "Sources of Information"
 #subtitle: "Which tracts are at-risk?"
 ---
+
+<br>
+<br>
+
+
 ## COL Data Discovery Results
 
-The COL estimates use multiple sources of publicly available information.  In the next table, we include the data sources, geographical area, geography adjustments, inflationadjustments, and assumptions that were used for the seven components of the COL.  
+ 
+The COL estimates includes seven categories of expenditure that help meet the basic necessities of households without public or private assistance.  These categories were identified from the major components of anual expenses, identified in the Consumer Expenditure Survey. The following figure summarizes the categories and their corresponding sources of information. 
+
+<br>
+<br>
+
+![](img/sources_data.png)  
+
+<br>
+<br>
+
+The COL estimates use multiple sources of publicly available information.  In the next table, we include the data sources, geographical area, geography adjustments, inflationadjustments, and assumptions that were used for the seven components of the COL. 
 
 <br>
 <br>
@@ -91,7 +107,7 @@ The COL estimates use multiple sources of publicly available information.  In th
   <tr>
     <td class="tg-fymr">&nbsp;&nbsp;&nbsp;<br>Other&nbsp;&nbsp;&nbsp;Necessities&nbsp;&nbsp;&nbsp;</td>
     <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>10%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">   <br>National Academy of Sciences, An Updated Measure of Poverty: (Re)Drawing the Line (2023) Report. (20%)</td>
     <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
     <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
     <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
@@ -108,3 +124,73 @@ The COL estimates use multiple sources of publicly available information.  In th
   </tr>
 </tbody>
 </table>
+
+
+<br>
+<br>
+
+## Assumptions
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-pewz{color:#00009b;font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-amwm{font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-pewz">    <br>Component    </th>
+    <th class="tg-pewz">    <br>Price by Category Combinations    </th>
+    <th class="tg-pewz">    <br>Assumptions    </th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-amwm">Housing</td>
+    <td class="tg-0lax">·<span style="font-weight:normal;font-style:normal">   </span>Yearly<br>·<span style="font-weight:normal;font-style:normal">   </span>Apartment sizes: studio, 1, 2, 3, and 4 bedrooms</td>
+    <td class="tg-0lax">·<span style="font-weight:normal;font-style:normal">   </span>1-person in a studio<br>·<span style="font-weight:normal;font-style:normal">   </span>2-people in a 1 bedroom<br>·<span style="font-weight:normal;font-style:normal">   </span>3-people in a 2 bedroom<br>·<span style="font-weight:normal;font-style:normal">   </span>4-people or more in a 3 bedroom</td>
+  </tr>
+  <tr>
+    <td class="tg-amwm">Food</td>
+    <td class="tg-0lax">·<span style="font-weight:normal;font-style:normal">   </span>Monthly<br>·<span style="font-weight:normal;font-style:normal">   </span>Four food plans: low, moderate, and liberal<br>·<span style="font-weight:normal;font-style:normal">   </span>Gender: female and male<br>·<span style="font-weight:normal;font-style:normal">   </span>Age: Child 1, 1-3, 4-5, 6-8, 9-11; Female 12-13, 14-18, 19-50, 51-70, 71+; Male 12-13, 14-18, 19-50, 51-70, 71+   </td>
+    <td class="tg-0lax">·<span style="font-weight:normal;font-style:normal">  </span>half of the people in a household are female and half are male<br>·<span style="font-weight:normal;font-style:normal">  </span>infants &lt; 1 year<br>·<span style="font-weight:normal;font-style:normal">  </span>toddlers 1-3 years<br>·<span style="font-weight:normal;font-style:normal">  </span>preschoolers 4-5 years<br>·<span style="font-weight:normal;font-style:normal">  </span>schoolers 6-11 years<br>·<span style="font-weight:normal;font-style:normal">  </span>teenagers 12-18 years<br>·<span style="font-weight:normal;font-style:normal">  </span>adults older than 19 years</td>
+  </tr>
+  <tr>
+    <td class="tg-amwm">Transportation</td>
+    <td class="tg-0lax">·<span style="font-weight:normal;font-style:normal">   </span>Yearly<br> </td>
+    <td class="tg-0lax">·<span style="font-weight:normal;font-style:normal">  </span>includes auto ownership, auto use, and transit use<br>·<span style="font-weight:normal;font-style:normal">  </span>independent of family size and composition</td>
+  </tr>
+  <tr>
+    <td class="tg-amwm">Healthcare</td>
+    <td class="tg-0lax">·<span style="font-weight:normal;font-style:normal">   </span>Yearly<br>·<span style="font-weight:normal;font-style:normal">   </span>Household size<br>·<span style="font-weight:normal;font-style:normal">   </span>Household composition<br>·<span style="font-weight:normal;font-style:normal">   </span>Age<br>·<span style="font-weight:normal;font-style:normal">   </span>Income</td>
+    <td class="tg-0lax">Households purchase health insurance through the Affordable Care Act Market Place.</td>
+  </tr>
+  <tr>
+    <td class="tg-amwm">Childcare</td>
+    <td class="tg-0lax">·<span style="font-weight:normal;font-style:normal">   </span>Biennial<br>·<span style="font-weight:normal;font-style:normal">   </span>Type: center and home-base<br>·<span style="font-weight:normal;font-style:normal">   </span>Age: infant, toddler, preschool, schoolers</td>
+    <td class="tg-0lax">·<span style="font-weight:normal;font-style:normal">  </span>parents use home-based care children<br>·<span style="font-weight:normal;font-style:normal">  </span>&gt;12 (teenagers) do not require childcare<br>·<span style="font-weight:normal;font-style:normal">  </span>infants &lt; 1<br>·<span style="font-weight:normal;font-style:normal">  </span>toddlers 1-3<br>·<span style="font-weight:normal;font-style:normal">  </span>preschoolers 4-5<br>·<span style="font-weight:normal;font-style:normal">  </span>schoolers 6-18</td>
+  </tr>
+  <tr>
+    <td class="tg-amwm">Broadband</td>
+    <td class="tg-0lax">·<span style="font-weight:normal;font-style:normal">   </span>Yearly<br> </td>
+    <td class="tg-0lax">·<span style="font-weight:normal;font-style:normal">  </span>median of the lowest price for 100 Mbps download speed</td>
+  </tr>
+  <tr>
+    <td class="tg-amwm">Other Necessities</td>
+    <td class="tg-0lax">·<span style="font-weight:normal;font-style:normal">   </span>Yearly<br> </td>
+    <td class="tg-0lax">·<span style="font-weight:normal;font-style:normal">  </span>20% of a household's expenditure on Housing and Food.</td>
+  </tr>
+  <tr>
+    <td class="tg-amwm">Taxes</td>
+    <td class="tg-0lax">·<span style="font-weight:normal;font-style:normal">   </span>Yearly<br>·<span style="font-weight:normal;font-style:normal">   </span>Household size<br>·<span style="font-weight:normal;font-style:normal">   </span>Household composition<br>·<span style="font-weight:normal;font-style:normal">   </span>Age of children<br>·<span style="font-weight:normal;font-style:normal">   </span>Income</td>
+    <td class="tg-0lax">·<span style="font-weight:normal;font-style:normal">  </span>all households are renters therefore pay no property taxes<br>·<span style="font-weight:normal;font-style:normal">  </span>tax liability includes income and sales taxes at the federal and state levels<br>·<span style="font-weight:normal;font-style:normal">  </span>there are no household deductions</td>
+  </tr>
+</tbody>
+</table>
+
+

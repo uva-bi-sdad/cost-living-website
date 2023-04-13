@@ -255,30 +255,6 @@ $(document).ready(function () {
   <a href="sources.html">Sources of Information</a>
 </li>
 <li>
-  <a href="overall_effects.html">Overall Policy Effects</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Policy Effects by Income Level
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="cat1_effects.html">Income less than $35,000</a>
-    </li>
-    <li>
-      <a href="cat2_effects.html">Income between $35,000 and $49,999</a>
-    </li>
-    <li>
-      <a href="cat3_effects.html">Income between $50,000 and $59,999</a>
-    </li>
-    <li>
-      <a href="else_effects.html">Income over $60,000</a>
-    </li>
-  </ul>
-</li>
-<li>
   <a href="https://github.com/uva-bi-sdad">
     <span class="fa fa-github"></span>
      
@@ -302,8 +278,18 @@ $(document).ready(function () {
 </div>
 
 
+<p><br> <br></p>
 <div id="col-data-discovery-results" class="section level2">
 <h2>COL Data Discovery Results</h2>
+<p>The COL estimates includes seven categories of expenditure that help
+meet the basic necessities of households without public or private
+assistance. These categories were identified from the major components
+of anual expenses, identified in the Consumer Expenditure Survey. The
+following figure summarizes the categories and their corresponding
+sources of information.</p>
+<p><br> <br></p>
+<p><img src="img/sources_data.png" /></p>
+<p><br> <br></p>
 <p>The COL estimates use multiple sources of publicly available
 information. In the next table, we include the data sources,
 geographical area, geography adjustments, inflationadjustments, and
@@ -525,7 +511,8 @@ Transportation, National Address Database</a>   
    <br>NA   
 </td>
 <td class="tg-0pky">
-   <br>10%      
+<br>National Academy of Sciences, An Updated Measure of Poverty:
+(Re)Drawing the Line (2023) Report. (20%)
 </td>
 <td class="tg-0pky">
    <br>NA   
@@ -568,7 +555,185 @@ has an interface in R
 </tr>
 </tbody>
 </table>
+<p><br> <br></p>
 </div>
+</div>
+<div id="assumptions" class="section level2">
+<h2>Assumptions</h2>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-pewz{color:#00009b;font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-amwm{font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+<tr>
+<th class="tg-pewz">
+<br>Component
+</th>
+<th class="tg-pewz">
+<br>Price by Category Combinations
+</th>
+<th class="tg-pewz">
+<br>Assumptions
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tg-amwm">
+Housing
+</td>
+<td class="tg-0lax">
+·<span style="font-weight:normal;font-style:normal">
+</span>Yearly<br>·<span style="font-weight:normal;font-style:normal">
+</span>Apartment sizes: studio, 1, 2, 3, and 4 bedrooms
+</td>
+<td class="tg-0lax">
+·<span style="font-weight:normal;font-style:normal"> </span>1-person in
+a studio<br>·<span style="font-weight:normal;font-style:normal">
+</span>2-people in a 1 bedroom<br>·<span
+style="font-weight:normal;font-style:normal"> </span>3-people in a 2
+bedroom<br>·<span style="font-weight:normal;font-style:normal">
+</span>4-people or more in a 3 bedroom
+</td>
+</tr>
+<tr>
+<td class="tg-amwm">
+Food
+</td>
+<td class="tg-0lax">
+·<span style="font-weight:normal;font-style:normal">
+</span>Monthly<br>·<span style="font-weight:normal;font-style:normal">
+</span>Four food plans: low, moderate, and liberal<br>·<span
+style="font-weight:normal;font-style:normal"> </span>Gender: female and
+male<br>·<span style="font-weight:normal;font-style:normal"> </span>Age:
+Child 1, 1-3, 4-5, 6-8, 9-11; Female 12-13, 14-18, 19-50, 51-70, 71+;
+Male 12-13, 14-18, 19-50, 51-70, 71+
+</td>
+<td class="tg-0lax">
+·<span style="font-weight:normal;font-style:normal"> </span>half of the
+people in a household are female and half are male<br>·<span
+style="font-weight:normal;font-style:normal"> </span>infants &lt; 1
+year<br>·<span style="font-weight:normal;font-style:normal">
+</span>toddlers 1-3 years<br>·<span
+style="font-weight:normal;font-style:normal"> </span>preschoolers 4-5
+years<br>·<span style="font-weight:normal;font-style:normal">
+</span>schoolers 6-11 years<br>·<span
+style="font-weight:normal;font-style:normal"> </span>teenagers 12-18
+years<br>·<span style="font-weight:normal;font-style:normal">
+</span>adults older than 19 years
+</td>
+</tr>
+<tr>
+<td class="tg-amwm">
+Transportation
+</td>
+<td class="tg-0lax">
+·<span style="font-weight:normal;font-style:normal"> </span>Yearly<br>
+</td>
+<td class="tg-0lax">
+·<span style="font-weight:normal;font-style:normal"> </span>includes
+auto ownership, auto use, and transit use<br>·<span
+style="font-weight:normal;font-style:normal"> </span>independent of
+family size and composition
+</td>
+</tr>
+<tr>
+<td class="tg-amwm">
+Healthcare
+</td>
+<td class="tg-0lax">
+·<span style="font-weight:normal;font-style:normal">
+</span>Yearly<br>·<span style="font-weight:normal;font-style:normal">
+</span>Household size<br>·<span
+style="font-weight:normal;font-style:normal"> </span>Household
+composition<br>·<span style="font-weight:normal;font-style:normal">
+</span>Age<br>·<span style="font-weight:normal;font-style:normal">
+</span>Income
+</td>
+<td class="tg-0lax">
+Households purchase health insurance through the Affordable Care Act
+Market Place.
+</td>
+</tr>
+<tr>
+<td class="tg-amwm">
+Childcare
+</td>
+<td class="tg-0lax">
+·<span style="font-weight:normal;font-style:normal">
+</span>Biennial<br>·<span style="font-weight:normal;font-style:normal">
+</span>Type: center and home-base<br>·<span
+style="font-weight:normal;font-style:normal"> </span>Age: infant,
+toddler, preschool, schoolers
+</td>
+<td class="tg-0lax">
+·<span style="font-weight:normal;font-style:normal"> </span>parents use
+home-based care children<br>·<span
+style="font-weight:normal;font-style:normal"> </span>&gt;12 (teenagers)
+do not require childcare<br>·<span
+style="font-weight:normal;font-style:normal"> </span>infants &lt;
+1<br>·<span style="font-weight:normal;font-style:normal">
+</span>toddlers 1-3<br>·<span
+style="font-weight:normal;font-style:normal"> </span>preschoolers
+4-5<br>·<span style="font-weight:normal;font-style:normal">
+</span>schoolers 6-18
+</td>
+</tr>
+<tr>
+<td class="tg-amwm">
+Broadband
+</td>
+<td class="tg-0lax">
+·<span style="font-weight:normal;font-style:normal"> </span>Yearly<br>
+</td>
+<td class="tg-0lax">
+·<span style="font-weight:normal;font-style:normal"> </span>median of
+the lowest price for 100 Mbps download speed
+</td>
+</tr>
+<tr>
+<td class="tg-amwm">
+Other Necessities
+</td>
+<td class="tg-0lax">
+·<span style="font-weight:normal;font-style:normal"> </span>Yearly<br>
+</td>
+<td class="tg-0lax">
+·<span style="font-weight:normal;font-style:normal"> </span>20% of a
+household’s expenditure on Housing and Food.
+</td>
+</tr>
+<tr>
+<td class="tg-amwm">
+Taxes
+</td>
+<td class="tg-0lax">
+·<span style="font-weight:normal;font-style:normal">
+</span>Yearly<br>·<span style="font-weight:normal;font-style:normal">
+</span>Household size<br>·<span
+style="font-weight:normal;font-style:normal"> </span>Household
+composition<br>·<span style="font-weight:normal;font-style:normal">
+</span>Age of children<br>·<span
+style="font-weight:normal;font-style:normal"> </span>Income
+</td>
+<td class="tg-0lax">
+·<span style="font-weight:normal;font-style:normal"> </span>all
+households are renters therefore pay no property taxes<br>·<span
+style="font-weight:normal;font-style:normal"> </span>tax liability
+includes income and sales taxes at the federal and state
+levels<br>·<span style="font-weight:normal;font-style:normal">
+</span>there are no household deductions
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
