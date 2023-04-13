@@ -6,14 +6,14 @@ output:
     theme: "flatly"
     css: style.css
 navbar:
-  title: "Social Impact Data Commons: A New Method for Estimating Food Security"
+  title: "Social Impact Data Commons:  Cost of Living Estimates"
   left:
     - text: "Project Overview"
       href: index.html
-    - text: "Food Insecurity"
+    - text: "Definitions"
       href: background.html
-    - text: "Exploring At-Risk Tracts"
-      href: tracts.html
+    - text: "Sources of Information"
+      href: sources.html
     - text: "Overall Policy Effects"
       href: overall_effects.html
     - text: "Policy Effects by Income Level"

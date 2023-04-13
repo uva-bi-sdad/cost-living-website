@@ -1,17 +1,31 @@
 ---
-title: "Food Insecurity in the United States"
-subtitle: How do we measuer Food Insecurity?
+title: "Cost-of-Living Estimates for Small Geographies"
+#subtitle: How do we measure cost-of-living?
 ---
-## Food Insecurity in the United States
 
-<!-- The USDA Current Population Survey Food Security Supplement (CPS-FSS) food insecurity measure is designed to monitor food insecurity over time at national and state levels. If a food insecurity measure is to inform action and target interventions, it must be constructed for smaller geographic levels and consider differences in the geographic cost-of-living. Moreover, such a model needs to consider incorporating data in all categories: those from statistical/intentional designs (e.g., surveys), administrative data (e.g., government records), opportunity data collections (e.g., social media), and information on procedures and processes (Keller et al., 2020).  -->
+<br>
+<br>
 
-<!-- <br> -->
+## Cost-of-Living (COL) Definition 
+
+COL estimates are based on the amount of income necessary to pay federal and state income taxes and meet a household’s basic essential needs. The basic needs include housing, food, transportation, health insurance, childcare, broadband, and other necessities such as clothing and a phone. The COL is a function of family size and composition and where the family resides.
+
+<br>
+<br>
 
 
+## Assumptions
 
-## SNAP Rules / Background
+The full cost of each need, without government subsidies (e.g., public housing, Medicaid, or childcare assistance); or nonprofit or informal assistance from family and friends (e.g., unpaid childcare by a relative, food from food banks, or shared housing).
 
-## What are the different factors (household size, income levels, eligibility, etc.)
+<br>
+<br>
 
-## Exploratory Plots
+## Other Estimations
+
+There are several tools to help individuals, communities, and employers determine a local wage rate that allows residents to meet minimum standards of living. These costs-of-living are used to backout the area minimum wage. However, they are not have updated estimates and do not consider the household composition of the geographies.  For example, these are three living wage calculators or monthly costs for tow adults and two children:
+<br>
+
+![Three COL calculators](img/three_calculators.png)  
+
+

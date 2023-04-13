@@ -1,0 +1,110 @@
+---
+title: "Sources of Information"
+#subtitle: "Which tracts are at-risk?"
+---
+## COL Data Discovery Results
+
+The COL estimates use multiple sources of publicly available information.  In the next table, we include the data sources, geographical area, geography adjustments, inflationadjustments, and assumptions that were used for the seven components of the COL.  
+
+<br>
+<br>
+
+### Components of the Cost-of-Living:Date, Data Source, Geographic Area, and Adjustments
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-cttg{border-color:inherit;color:#00009b;font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-fymr{border-color:inherit;font-weight:bold;text-align:left;vertical-align:top}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-cttg"><span style="font-weight:bold">Component    </span></th>
+    <th class="tg-cttg">Data <br>Updates    </th>
+    <th class="tg-cttg">Data<br>Source</th>
+    <th class="tg-cttg">Original <br>Geographic <br>Area</th>
+    <th class="tg-cttg">Geographic<br>Area<br>Adjustment</th>
+    <th class="tg-cttg">Inflation<br>(Time)<br>Adjustment</th>
+    <th class="tg-cttg">Final<br>Geographic <br>Area</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-fymr">&nbsp;&nbsp;&nbsp;<br>Housing&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Yearly&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>HUD&nbsp;&nbsp;&nbsp;Small Area 40% of <a href="https://www.huduser.gov/portal/datasets/fmr/smallarea/index.html">Fair&nbsp;&nbsp;&nbsp;Market Rent</a>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>ZIP&nbsp;&nbsp;&nbsp;code<br>&nbsp;&nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>ZIPS&nbsp;&nbsp;&nbsp;codes are distributed to census tracts based on demographic data&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Census&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;<br>tract&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="tg-fymr">&nbsp;&nbsp;&nbsp;<br>Food&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Monthly&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br><a href="https://www.fns.usda.gov/cnpp/usda-food-plans-cost-food-reports-monthly-reports">USDA&nbsp;&nbsp;&nbsp;Food Plans: Cost of Food Reports (monthly reports)</a><br>&nbsp;&nbsp;&nbsp;<br>Low,&nbsp;&nbsp;&nbsp;Moderate, and Liberal Food Plans&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>National&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>National&nbsp;&nbsp;&nbsp;adjusted to the county level using 2020 Feeding America’s Map the Meal Gap&nbsp;&nbsp;&nbsp;estimates at the county and independent city level&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br><a href="https://www.bls.gov/regions/mid-atlantic/news-release/consumerpriceindex_washingtondc.htm#ro3xg01wbu.f.1">Consumer&nbsp;&nbsp;&nbsp;Price Index, Washington-Arlington-Alexandria area – November 2022</a>;<br>&nbsp;&nbsp;&nbsp;<br><a href="https://www.bls.gov/regions/mid-atlantic/news-release/2021/consumerpriceindex_washingtondc_20211210.htm">Consumer&nbsp;&nbsp;&nbsp;Price Index, Washington-Arlington-Alexandria area – November 2021</a><br>&nbsp;&nbsp;&nbsp;<br>(used&nbsp;&nbsp;&nbsp;to adjust the 2020 Feeding America’s Map the Meal Gap data)&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>County&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="tg-fymr">&nbsp;&nbsp;&nbsp;<br>Transportation&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Yearly&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br><a href="https://htaindex.cnt.org/">H+T</a>&nbsp;&nbsp;&nbsp;(Housing + Transit Affordability Index) <br>&nbsp;&nbsp;&nbsp;<br>non-profit&nbsp;&nbsp;&nbsp;<a href="https://cnt.org/">Center for Neighborhood&nbsp;&nbsp;&nbsp;Technology</a><br>&nbsp;&nbsp;&nbsp;<br>(<a href="https://htaindex.cnt.org/about/method-2022.pdf">Methodology</a>)&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Census&nbsp;&nbsp;&nbsp;tract&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Census&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;<br>tract&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="tg-fymr">&nbsp;&nbsp;&nbsp;<br>Healthcare&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Yearly&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br><span style="color:black;background-color:#F2F2F2">U.S. Centers for&nbsp;&nbsp;&nbsp;Medicare &amp; Medicaid Services,</span><br>&nbsp;&nbsp;&nbsp;<br><a href="https://www.healthcare.gov/apply-and-enroll/how-to-apply/"><span style="background-color:#F2F2F2">Health Insurance Market Place</span></a><span style="color:black;background-color:#F2F2F2"> </span>&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>ZIP&nbsp;&nbsp;&nbsp;code<br>&nbsp;&nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>County&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="tg-fymr">&nbsp;&nbsp;&nbsp;<br>Childcare&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Biennial&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br><a href="https://www.dol.gov/agencies/wb/topics/featured-childcare">Department&nbsp;&nbsp;&nbsp;of Labor Women’s Bureau National</a> Database of Median Childcare&nbsp;&nbsp;&nbsp;Prices <br>&nbsp;&nbsp;&nbsp;<br>(<a href="https://www.dol.gov/sites/dolgov/files/WB/media/NationalDatabaseofChildcarePricesTechnicalGuideFinal.pdf">Methodology</a>)&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>County&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Department&nbsp;&nbsp;&nbsp;of Labor Women’s Bureau National Methodology used to impute the Washington,&nbsp;&nbsp;&nbsp;D.C. child care area cost from 2012 to 2022&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>County&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="tg-fymr">&nbsp;&nbsp;&nbsp;<br>Broadband&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Scraped&nbsp;&nbsp;&nbsp;from <a href="https://broadbandnow.com/">BroadbandNow</a><br>&nbsp;&nbsp;&nbsp;<br>Median&nbsp;&nbsp;&nbsp;of the lowest prices for <span style="color:black">100 Mbps download plans for&nbsp;&nbsp;&nbsp;addresses from the</span><br>&nbsp;&nbsp;&nbsp;<br><a href="https://www.transportation.gov/gis/national-address-database">Department&nbsp;&nbsp;&nbsp;of Transportation, National Address Database</a>&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Address&nbsp;&nbsp;&nbsp;at the center of a Census block&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Census&nbsp;&nbsp;&nbsp;tract&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="tg-fymr">&nbsp;&nbsp;&nbsp;<br>Other&nbsp;&nbsp;&nbsp;Necessities&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>10%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="tg-fymr">&nbsp;&nbsp;&nbsp;<br>Taxes&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Yearly&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>National&nbsp;&nbsp;&nbsp;Bureau of Economic Research’s program <a href="http://taxsim.nber.org/taxsim35/">TAXSIM</a> Version&nbsp;&nbsp;&nbsp;35 which has an interface in R <a href="https://cran.rstudio.com/web/packages/usincometaxes/vignettes/using-usincometaxes.html">usincometaxes</a>&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>State&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>NA&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>State&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+</tbody>
+</table>
