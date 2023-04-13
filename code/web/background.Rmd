@@ -1,8 +1,14 @@
 ---
-title: "Overview of SNAP"
-subtitle: "What is SNAP?"
+title: "Food Insecurity in the United States"
+subtitle: How do we measuer Food Insecurity?
 ---
-## What is SNAP, etc.
+## Food Insecurity in the United States
+
+<!-- The USDA Current Population Survey Food Security Supplement (CPS-FSS) food insecurity measure is designed to monitor food insecurity over time at national and state levels. If a food insecurity measure is to inform action and target interventions, it must be constructed for smaller geographic levels and consider differences in the geographic cost-of-living. Moreover, such a model needs to consider incorporating data in all categories: those from statistical/intentional designs (e.g., surveys), administrative data (e.g., government records), opportunity data collections (e.g., social media), and information on procedures and processes (Keller et al., 2020).  -->
+
+<!-- <br> -->
+
+
 
 ## SNAP Rules / Background
 

@@ -6,18 +6,18 @@ output:
     theme: "flatly"
     css: style.css
 navbar:
-  title: "Social Impact Data Commons: Fairfax County SNAP Tool"
+  title: "Social Impact Data Commons: A New Method for Estimating Food Security"
   left:
     - text: "Project Overview"
       href: index.html
-    - text: "SNAP Background"
+    - text: "Food Insecurity"
       href: background.html
     - text: "Exploring At-Risk Tracts"
       href: tracts.html
     - text: "Overall Policy Effects"
       href: overall_effects.html
     - text: "Policy Effects by Income Level"
-      menu: 
+      menu:
       - text: "Income less than $35,000"
         href: cat1_effects.html
       - text: "Income between $35,000 and $49,999"
