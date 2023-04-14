@@ -2,7 +2,11 @@
 title: "Cost of Living Estimates"
 subtitle: "Examples for census tracts in Fairfax County, VA."
 ---
-## Housing Costs
+
+<br>
+<br>
+
+## Average Housing Costs
 
 ```{r, echo=FALSE, warning=FALSE, include=FALSE}
 library(tigris)
@@ -12,11 +16,20 @@ library(dplyr)
 
 ```{r, echo=FALSE, warning=FALSE, include=FALSE}
 #data
-county <- read.csv("~/Documents/R/git/cost-living-website/code/web/data_estimation/fairfax_2022_food_insecurity_rev.csv")
+county_fairfax <- read.csv("~/Documents/R/git/cost-living-website/code/web/data_estimation/fairfax_2022_food_insecurity_rev.csv")
+county_arl <- read.csv("~/Documents/R/git/cost-living-website/code/web/data_estimation/arlington_2022_food_insecurity_rev.csv") %>% select(-c(X))
+county_alexandria <- read.csv("~/Documents/R/git/cost-living-website/code/web/data_estimation/alexandria_2022_food_insecurity_rev.csv") %>% select(-c(X))
+county_prince_will <- read.csv("~/Documents/R/git/cost-living-website/code/web/data_estimation/princewilliam_2022_food_insecurity_rev.csv") %>% select(-c(X))
+county_loudoun <- read.csv("~/Documents/R/git/cost-living-website/code/web/data_estimation/loudoun_2022_food_insecurity_rev.csv") %>% select(-c(X))
+
+
+#join data
+county <- rbind(county_fairfax, county_arl, county_alexandria, county_prince_will, county_loudoun)
+
 #data
 county_tract_sum <- county %>% group_by(GEOID=geoid) %>% summarise(housing_cost_avr = weighted.mean(housing_cost, num_hh))
 #tracts geometry
-tracts_county <- tracts(state = "VA", county = "Fairfax County", cb = FALSE, year = 2020) %>% select(STATEFP, COUNTYFP, TRACTCE, GEOID, NAME, NAMELSAD, geometry)
+tracts_county <- tracts(state = "VA", county = c("Fairfax County", "Arlington County", "Alexandria City", "Prince William County"), cb = FALSE, year = 2020) %>% select(STATEFP, COUNTYFP, TRACTCE, GEOID, NAME, NAMELSAD, geometry)
 #data plot
 
 tracts_county$GEOID <- as.character(tracts_county$GEOID)

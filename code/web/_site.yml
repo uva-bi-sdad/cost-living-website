@@ -14,6 +14,8 @@ navbar:
       href: background.html
     - text: "Sources of Information"
       href: sources.html
+    - text: "Costs estimation"
+      href: cost_estimation.html
     - text: ""
       icon: fa-github
       href: "https://github.com/uva-bi-sdad"
