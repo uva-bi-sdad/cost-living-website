@@ -8,15 +8,11 @@ title: "Cost-of-Living Estimates for Small Geographies"
 
 ## Cost-of-Living (COL) Definition 
 
-COL estimates are based on the amount of income necessary to pay federal and state income taxes and meet a household’s basic essential needs. The basic needs include housing, food, transportation, health insurance, childcare, broadband, and other necessities such as clothing and a phone. The COL is a function of family size and composition and where the family resides.
+The COL is the income a family needs to function in society at a modest yet adequate standard of living in the community in which they reside. The COL is a function of household size and composition and where the household is located. The components that allow for a modest standard of living include the cost of housing, food, healthcare, childcare, transportation, internet, and other necessities such as clothing, household supplies, personal care, nonprescription medicine, and school supplies, along with a household’s tax liability. 
 
-<br>
-<br>
+It assumes the full cost of each need, without government subsidies (e.g., public housing, Medicaid, or childcare assistance); or nonprofit or informal assistance from family and friends (e.g., unpaid childcare by a relative, food from food banks, or shared housing). 
 
 
-## Assumptions
-
-The full cost of each need, without government subsidies (e.g., public housing, Medicaid, or childcare assistance); or nonprofit or informal assistance from family and friends (e.g., unpaid childcare by a relative, food from food banks, or shared housing).
 
 <br>
 <br>

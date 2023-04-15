@@ -1,12 +1,12 @@
 ---
 title: "Cost of Living Estimates"
-subtitle: "Examples for census tracts in Fairfax County, VA."
+subtitle: "Examples for census tracts in the National Capital Region."
 ---
 
 <br>
 <br>
 
-## Average Housing Cost
+## Average Housing Cost per month
 
 ```{r, echo=FALSE, warning=FALSE, include=FALSE}
 library(tigris)
@@ -35,7 +35,12 @@ county <- rbind(county_fairfax, county_arl, county_alexandria, county_prince_wil
 
 #data
 county_tract_sum <- county %>% group_by(GEOID=geoid) %>% summarise(housing_cost_avr = weighted.mean(housing_cost, num_hh, na.rm = TRUE), 
-                                                                   food_cost_avr = weighted.mean(food_costs, num_hh, na.rm = TRUE))
+                                                                   food_cost_avr = weighted.mean(food_costs, num_hh, na.rm = TRUE), 
+                                                                   trans_cost_avr = weighted.mean(trans_cost, num_hh, na.rm = TRUE),
+                                                                   internet_cost_avr = weighted.mean(internet_cost, num_hh, na.rm = TRUE),
+                                                                   healthcare_cost_avr = weighted.mean(healthcare_cost, num_hh, na.rm = TRUE),
+                                                                   cc_cost_avr = weighted.mean(cc_cost, num_hh, na.rm = TRUE)
+                                                                   )
 #tracts geometry
 tracts_county_va <- tracts(state = "VA", county = c("Fairfax County", "Arlington County", "Alexandria City", "Prince William County", "Loudoun County", 
                                                     "Falls Church City", "Fairfax City", "Manassas City", "Manassas Park City"), cb = FALSE, year = 2020) %>% select(STATEFP, COUNTYFP, TRACTCE, GEOID, NAME, NAMELSAD, geometry)
@@ -101,7 +106,7 @@ map_housing
 <br>
 <br>
 
-## Average Food Cost
+## Average Food Cost per month
 
 ```{r, echo=FALSE, warning=FALSE, fig.width = 10, fig.height= 10}
 library(sf)
@@ -135,5 +140,122 @@ map_food <- leaflet(data_plot_sf , options = leafletOptions(attributionControl =
   addPolylines(data = shape_counties_dmv, color = "black", opacity = 1, weight = 2.5) 
 
 map_food
+```
+
+<br>
+<br>
+
+## Average Internet Cost per month
+
+```{r, echo=FALSE, warning=FALSE, fig.width = 10, fig.height= 10}
+library(sf)
+library(leaflet)
+library(dplyr)
+library(readr)
+
+#format st
+data_plot_sf <- st_as_sf(data_plot) # %>% filter(tot_hh > 10)
+
+#palette colors
+pal <- colorBin("viridis", data_plot_sf$internet_cost_avr, bins = 10)
+
+# map
+map_internet <- leaflet(data_plot_sf , options = leafletOptions(attributionControl = FALSE)) %>%
+  addTiles() %>%
+  addScaleBar("bottomleft") %>%
+  addControl("Average Cost of Food", "topright") %>%
+  addLegend("bottomright", pal, data_plot_sf$internet_cost_avr, opacity = .7) %>%
+  addPolygons(
+    fillColor = pal(data_plot_sf$internet_cost_avr), fillOpacity = .7, weight = 1, color = "#000",
+    highlightOptions = highlightOptions(color = "#fff"),
+    label = paste0(
+      "Average Cost of Food: $", round(data_plot_sf$internet_cost_avr,0) ,  "<br/>", 
+      "Census tract: ", data_plot_sf$NAMELSAD, "<br/>"
+      #"Proportion HH Food Insecurity ", round(data_plot_sf$internet_cost_avr,2), "<br/>",
+      #"PUMA: ", food_sec_tract_num_plot$pumas
+    ) %>% 
+      lapply(htmltools::HTML) 
+  ) %>%
+  addPolylines(data = shape_counties_dmv, color = "black", opacity = 1, weight = 2.5) 
+
+map_internet
+```
+
+<br>
+<br>
+
+## Average Transportation Cost per month
+
+```{r, echo=FALSE, warning=FALSE, fig.width = 10, fig.height= 10}
+library(sf)
+library(leaflet)
+library(dplyr)
+library(readr)
+
+#format st
+data_plot_sf <- st_as_sf(data_plot) # %>% filter(tot_hh > 10)
+
+#palette colors
+pal <- colorBin("viridis", data_plot_sf$trans_cost_avr, bins = 10)
+
+# map
+map_trasportation <- leaflet(data_plot_sf , options = leafletOptions(attributionControl = FALSE)) %>%
+  addTiles() %>%
+  addScaleBar("bottomleft") %>%
+  addControl("Average Cost of Food", "topright") %>%
+  addLegend("bottomright", pal, data_plot_sf$trans_cost_avr, opacity = .7) %>%
+  addPolygons(
+    fillColor = pal(data_plot_sf$trans_cost_avr), fillOpacity = .7, weight = 1, color = "#000",
+    highlightOptions = highlightOptions(color = "#fff"),
+    label = paste0(
+      "Average Cost of Food: $", round(data_plot_sf$trans_cost_avr,0) ,  "<br/>", 
+      "Census tract: ", data_plot_sf$NAMELSAD, "<br/>"
+      #"Proportion HH Food Insecurity ", round(data_plot_sf$trans_cost_avr,2), "<br/>",
+      #"PUMA: ", food_sec_tract_num_plot$pumas
+    ) %>% 
+      lapply(htmltools::HTML) 
+  ) %>%
+  addPolylines(data = shape_counties_dmv, color = "black", opacity = 1, weight = 2.5) 
+
+map_trasportation
+```
+
+<br>
+<br>
+
+## Average Childcare Cost per month
+
+```{r, echo=FALSE, warning=FALSE, fig.width = 10, fig.height= 10}
+library(sf)
+library(leaflet)
+library(dplyr)
+library(readr)
+
+#format st
+data_plot_sf <- st_as_sf(data_plot) # %>% filter(tot_hh > 10)
+
+#palette colors
+pal <- colorBin("viridis", data_plot_sf$cc_cost_avr, bins = 10)
+
+# map
+map_trasportation <- leaflet(data_plot_sf , options = leafletOptions(attributionControl = FALSE)) %>%
+  addTiles() %>%
+  addScaleBar("bottomleft") %>%
+  addControl("Average Cost of Food", "topright") %>%
+  addLegend("bottomright", pal, data_plot_sf$cc_cost_avr, opacity = .7) %>%
+  addPolygons(
+    fillColor = pal(data_plot_sf$cc_cost_avr), fillOpacity = .7, weight = 1, color = "#000",
+    highlightOptions = highlightOptions(color = "#fff"),
+    label = paste0(
+      "Average Cost of Food: $", round(data_plot_sf$cc_cost_avr,0) ,  "<br/>", 
+      "Census tract: ", data_plot_sf$NAMELSAD, "<br/>"
+      #"Proportion HH Food Insecurity ", round(data_plot_sf$cc_cost_avr,2), "<br/>",
+      #"PUMA: ", food_sec_tract_num_plot$pumas
+    ) %>% 
+      lapply(htmltools::HTML) 
+  ) %>%
+  addPolylines(data = shape_counties_dmv, color = "black", opacity = 1, weight = 2.5) 
+
+map_trasportation
 ```
 
