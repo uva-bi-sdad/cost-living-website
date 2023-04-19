@@ -17,7 +17,7 @@ library(stars)
 
 ```{r, echo=FALSE, warning=FALSE, include=FALSE}
 #data
-county_fairfax <- read.csv("~/Documents/R/git/cost-living-website/code/web/data_estimation/fairfax_2022_food_insecurity_rev.csv") %>% select(-c(moe, PUMA5CE_20))
+county_fairfax <- read.csv("~/Documents/R/git/cost-living-website/code/web/data_estimation/") %>% select(-c(moe, PUMA5CE_20))
 county_arl <- read.csv("~/Documents/R/git/cost-living-website/code/web/data_estimation/arlington_2022_food_insecurity_rev.csv") %>% select(-c(X, moe, PUMA5CE_20))
 county_alexandria <- read.csv("~/Documents/R/git/cost-living-website/code/web/data_estimation/alexandria_2022_food_insecurity_rev.csv") %>% select(-c(X, moe, PUMA5CE_20))
 county_prince_will <- read.csv("~/Documents/R/git/cost-living-website/code/web/data_estimation/princewilliam_2022_food_insecurity_rev.csv") %>% select(-c(X, moe, PUMA5CE_20))
