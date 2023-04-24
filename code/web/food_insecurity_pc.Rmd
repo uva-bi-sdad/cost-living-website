@@ -1,0 +1,131 @@
+---
+title: " "
+author: " "
+date: "4/24/2023"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, warning=FALSE, include=FALSE}
+library(plotly)
+library(sf)
+library(dplyr)
+library(ggplot2)
+library(tidycensus)
+library(tidyverse)
+library(patchwork)
+library(ggiraph)
+library(scales)
+library(googleway)
+library(sf)
+library(spdep)
+library(leaflet)
+library(gt)
+library(acs)
+library(tigris)
+library(shiny)
+library(viridis)
+library(ggupset)
+library(ggrepel)
+library(ggmap)
+```
+
+
+
+
+
+```{r, echo=FALSE, warning=FALSE, include=FALSE}
+#data
+county_fairfax <- read.csv("~/git/cost-living-website/docs/data_estimation/fairfax_fallschurch_fairfaxcity_2022_food_insecurity_rev.csv") %>% select(-c(moe, PUMA5CE_20))
+county_arl <- read.csv("~/git/cost-living-website/docs/data_estimation/arlington_2022_food_insecurity_rev.csv") %>% select(-c(X, moe, PUMA5CE_20))
+county_alexandria <- read.csv("~/git/cost-living-website/docs/data_estimation/alexandria_2022_food_insecurity_rev.csv") %>% select(-c(X, moe, PUMA5CE_20))
+county_prince_will <- read.csv("~/git/cost-living-website/docs/data_estimation/princewilliam_2022_food_insecurity_rev.csv") %>% select(-c(X, moe, PUMA5CE_20))
+county_loudoun <- read.csv("~/git/cost-living-website/docs/data_estimation/loudoun_2022_food_insecurity_rev.csv") %>% select(-c(X, moe, PUMA5CE_20))
+county_frederick <- read.csv("~/git/cost-living-website/docs/data_estimation/12.frederick_md_2022_food_insecurity_rev.csv") %>% select(-c(X, moe.x, moe.y, PUMA20))
+county_montgomery <- read.csv("~/git/cost-living-website/docs/data_estimation/montgomery_md_2022_food_insecurity_rev.csv") %>% select(-c(PUMA20, moe))
+county_princegeorge <- read.csv("~/git/cost-living-website/docs/data_estimation/princegeorge_2022_food_insecurity_rev.csv") %>% select(-c(X, PUMA20, moe))
+county_wash_dc <- read.csv("~/git/cost-living-website/docs/data_estimation/dc_2022_food_insecurity_rev.csv") %>% select(-c(X,  PUMA20, PUMA5CE_new, other_cost_20))
+county_charles <- read.csv("~/git/cost-living-website/docs/data_estimation/charles_md_2022_food_insecurity_rev.csv") %>% select(-c(X, PUMA20, other_cost_20, moe))
+
+
+
+#join data
+county <- rbind(county_fairfax, county_arl, county_alexandria, county_prince_will, county_loudoun, county_frederick, county_montgomery, county_princegeorge, county_wash_dc, county_charles)
+
+
+food_sec_tract_num_long <- county %>% group_by(geoid, food_insecure_status) %>% summarise(total_hh = sum(num_hh, na.rm = TRUE), puma=first(PUMA5CE))
+
+
+food_sec_tract_num <- food_sec_tract_num_long %>% pivot_wider(names_from = food_insecure_status, values_from = total_hh) %>% 
+  mutate(tot_hh= `At-Risk`+ `Food Insecure` + `Food Secure`,
+         at_risk_pc= `At-Risk`/tot_hh,
+         insecure_pc= `Food Insecure`/tot_hh,
+         secure_pc= `Food Secure`/tot_hh,
+         pumas = first(puma)
+         )
+
+
+
+
+                               
+# #tracts geometry
+tracts_county_va <- tracts(state = "VA", county = c("Fairfax County", "Arlington County", "Alexandria City", "Prince William County", "Loudoun County", 
+                                                    "Falls Church City", "Fairfax City", "Manassas City", "Manassas Park City"), cb = FALSE, year = 2020) %>% select(STATEFP, COUNTYFP, TRACTCE, GEOID, NAME, NAMELSAD, geometry)
+
+tracts_county_md <- tracts(state = "MD", county = c("Frederick County", "Montgomery County", "Prince George's County", "Charles County"), cb = FALSE, year = 2020) %>% select(STATEFP, COUNTYFP, TRACTCE, GEOID, NAME, NAMELSAD, geometry)
+
+tracts_county_dc <- tracts(state = "DC", cb = FALSE, year = 2020) %>% select(STATEFP, COUNTYFP, TRACTCE, GEOID, NAME, NAMELSAD, geometry)
+
+tracts_county <- rbind(tracts_county_va, tracts_county_md, tracts_county_dc)
+
+#data plot
+tracts_county$GEOID <- as.character(tracts_county$GEOID)
+food_sec_tract_num$geoid <- as.character(food_sec_tract_num$geoid)
+food_sec_tract_num <- rename(food_sec_tract_num, GEOID = geoid)
+food_sec_tract_num <- select(food_sec_tract_num, -c("NA"))
+
+data_plot <- left_join(tracts_county, food_sec_tract_num, by = "GEOID")
+
+data_plot$geometry <- st_cast(data_plot$geometry,"MULTIPOLYGON")
+
+```
+
+
+
+
+```{r, echo=FALSE, warning=FALSE}
+
+library(ggiraph)
+
+# Create plot for proportion of households facing food insecurity with tooltips
+plot_numhh_finsec <- ggplot(data_plot, aes(tot_hh, insecure_pc, fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME, "<br>", "Food Insecurity: ", insecure_pc, "%"))) + 
+  geom_point_interactive(color = "black", size = 2, shape = 20, aes(data_id = GEOID)) +
+  scale_fill_distiller(palette = "Blues", direction = 1) + 
+  labs(title = 'Food Insecurity and Number of Households by Census Tracts in NCR Region', 
+        x = "Number of Households", 
+       y = "Proportion of Households Facing Food Insecurity") + 
+  theme(legend.text = element_text(size = 10), 
+        legend.position = "bottom") +
+guides(fill = FALSE) 
+
+# Create plot for choropleth map with tooltips
+c <- ggplot(data_plot, aes(fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME, "<br>", "Food Insecurity: ", insecure_pc, "%"), geometry = geometry )) +
+  geom_sf_interactive(aes(data_id = GEOID)) + 
+  scale_fill_gradient(low = "white", high = "#4B9CD3") +
+  theme_void() + 
+  guides(fill = guide_legend(title = "Food Insecurity %", title.position = "top", 
+                             label.position = "bottom", label.theme = element_text(size = 8)))
+
+# Combine plots using girafe
+girafe(ggobj = plot_numhh_finsec + c) %>%
+  girafe_options(opts_hover(css = "fill:cyan;")) 
+
+
+```
+
+
+
+
