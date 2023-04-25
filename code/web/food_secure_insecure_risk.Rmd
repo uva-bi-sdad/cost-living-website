@@ -1,0 +1,210 @@
+---
+title: "Maps of At Risk, Food Secure and Food Insecure Households in NCR Region"
+---
+
+<br>
+<br>
+
+## At Risk Households
+
+```{r, echo=FALSE, warning=FALSE, include=FALSE}
+library(tigris)
+library(dplyr)
+library(stars)
+```
+
+
+```{r, echo=FALSE, warning=FALSE, include=FALSE}
+#data
+county_fairfax <- read.csv("~/git/cost-living-website/docs/data_estimation/fairfax_fallschurch_fairfaxcity_2022_food_insecurity_rev.csv") %>% select(-c(moe, PUMA5CE_20))
+county_arl <- read.csv("~/git/cost-living-website/docs/data_estimation/arlington_2022_food_insecurity_rev.csv") %>% select(-c(X, moe, PUMA5CE_20))
+county_alexandria <- read.csv("~/git/cost-living-website/docs/data_estimation/alexandria_2022_food_insecurity_rev.csv") %>% select(-c(X, moe, PUMA5CE_20))
+county_prince_will <- read.csv("~/git/cost-living-website/docs/data_estimation/princewilliam_2022_food_insecurity_rev.csv") %>% select(-c(X, moe, PUMA5CE_20))
+county_loudoun <- read.csv("~/git/cost-living-website/docs/data_estimation/loudoun_2022_food_insecurity_rev.csv") %>% select(-c(X, moe, PUMA5CE_20))
+county_frederick <- read.csv("~/git/cost-living-website/docs/data_estimation/12.frederick_md_2022_food_insecurity_rev.csv") %>% select(-c(X, moe.x, moe.y, PUMA20))
+county_montgomery <- read.csv("~/git/cost-living-website/docs/data_estimation/montgomery_md_2022_food_insecurity_rev.csv") %>% select(-c(PUMA20, moe))
+county_princegeorge <- read.csv("~/git/cost-living-website/docs/data_estimation/princegeorge_2022_food_insecurity_rev.csv") %>% select(-c(X, PUMA20, moe))
+county_wash_dc <- read.csv("~/git/cost-living-website/docs/data_estimation/dc_2022_food_insecurity_rev.csv") %>% select(-c(X,  PUMA20, PUMA5CE_new, other_cost_20))
+county_charles <- read.csv("~/git/cost-living-website/docs/data_estimation/charles_md_2022_food_insecurity_rev.csv") %>% select(-c(X, PUMA20, other_cost_20, moe))
+
+
+
+#join data
+county <- rbind(county_fairfax, county_arl, county_alexandria, county_prince_will, county_loudoun, county_frederick, county_montgomery, county_princegeorge, county_wash_dc, county_charles)
+
+
+food_sec_tract_num_long <- county %>% group_by(geoid, food_insecure_status) %>% summarise(total_hh = sum(num_hh, na.rm = TRUE), puma=first(PUMA5CE))
+
+
+
+
+
+                               
+# #tracts geometry
+tracts_county_va <- tracts(state = "VA", county = c("Fairfax County", "Arlington County", "Alexandria City", "Prince William County", "Loudoun County", 
+                                                    "Falls Church City", "Fairfax City", "Manassas City", "Manassas Park City"), cb = FALSE, year = 2020) %>% select(STATEFP, COUNTYFP, TRACTCE, GEOID, NAME, NAMELSAD, geometry)
+
+tracts_county_md <- tracts(state = "MD", county = c("Frederick County", "Montgomery County", "Prince George's County", "Charles County"), cb = FALSE, year = 2020) %>% select(STATEFP, COUNTYFP, TRACTCE, GEOID, NAME, NAMELSAD, geometry)
+
+tracts_county_dc <- tracts(state = "DC", cb = FALSE, year = 2020) %>% select(STATEFP, COUNTYFP, TRACTCE, GEOID, NAME, NAMELSAD, geometry)
+
+tracts_county <- rbind(tracts_county_va, tracts_county_md, tracts_county_dc)
+
+#data plot
+tracts_county$GEOID <- as.character(tracts_county$GEOID)
+food_sec_tract_num_long$geoid <- as.character(food_sec_tract_num_long$geoid)
+
+colnames(food_sec_tract_num_long)[1]  <- "GEOID"
+data_plot <- left_join(tracts_county, food_sec_tract_num_long, by = "GEOID")
+
+
+
+#counties geometry
+shape_counties <- tigris::counties(state = c("VA", "MD", "DC"), class = "sf")
+shape_counties_dmv <- shape_counties %>% filter(GEOID == 51013 | GEOID ==51059 | GEOID == 51600 | GEOID == 51107 | GEOID == 51610 | GEOID == 51683 | 
+                                                  GEOID == 51685 | GEOID == 51153 | GEOID == 51510 | GEOID == 11001 | GEOID ==  24021 | GEOID == 24031 | GEOID == 24033 | GEOID == 24017
+                                                ) 
+#format for counties
+shape_counties_dmv <- st_transform(shape_counties_dmv, 4326 )
+
+```
+
+
+
+```{r, echo=FALSE, warning=FALSE, include=FALSE}
+
+# subseting each category for the plots
+data_plot_r <- subset(data_plot,food_insecure_status %in%  "At-Risk")
+data_plot_fs <- subset(data_plot,food_insecure_status %in%  "Food Secure")
+data_plot_fi <- subset(data_plot,food_insecure_status %in%  "Food Insecure")
+```
+
+
+
+
+
+```{r, echo=FALSE, warning=FALSE, fig.width = 10, fig.height= 10}
+library(sf)
+library(leaflet)
+library(dplyr)
+library(readr)
+
+
+
+#format st
+data_plot_r_sf <- st_as_sf(data_plot_r) # %>% filter(tot_hh > 10)
+
+#palette colors
+pal <- colorBin("viridis", data_plot_r_sf$total_hh, bins = 10)
+
+
+# map
+map_at_risk <- leaflet(data_plot_r_sf , options = leafletOptions(attributionControl = FALSE)) %>%
+  addTiles() %>%
+  addScaleBar("bottomleft") %>%
+  addControl("At Risk households", "topright") %>%
+  addLegend("bottomright", pal, data_plot_r_sf$total_hh, opacity = .7) %>%
+  addPolygons(
+    fillColor = pal(data_plot_r_sf$total_hh), fillOpacity = .7, weight = 1, color = "#000",
+    highlightOptions = highlightOptions(color = "#fff"),
+    label = paste0(
+      "Number of households at risk:", data_plot_r_sf$total_hh ,  "<br/>", 
+      "Census tract: ", data_plot_r_sf$NAMELSAD, "<br/>"
+    ) %>% 
+      lapply(htmltools::HTML) 
+  ) %>%
+  addPolylines(data = shape_counties_dmv, color = "black", opacity = 1, weight = 2.5) 
+
+map_at_risk
+```
+
+
+
+<br>
+<br>
+
+## Food Secure Households
+
+```{r, echo=FALSE, warning=FALSE, fig.width = 10, fig.height= 10}
+library(sf)
+library(leaflet)
+library(dplyr)
+library(readr)
+
+
+
+#format st
+data_plot_fs_sf <- st_as_sf(data_plot_fs) # %>% filter(tot_hh > 10)
+
+#palette colors
+pal <- colorBin("viridis", data_plot_fs_sf$total_hh, bins = 10)
+
+
+# map
+map_food_secure <- leaflet(data_plot_fs_sf , options = leafletOptions(attributionControl = FALSE)) %>%
+  addTiles() %>%
+  addScaleBar("bottomleft") %>%
+  addControl("Food Secure households", "topright") %>%
+  addLegend("bottomright", pal, data_plot_fs_sf$total_hh, opacity = .7) %>%
+  addPolygons(
+    fillColor = pal(data_plot_fs_sf$total_hh), fillOpacity = .7, weight = 1, color = "#000",
+    highlightOptions = highlightOptions(color = "#fff"),
+    label = paste0(
+      "Number of Food Secure households:", data_plot_fs_sf$total_hh ,  "<br/>", 
+      "Census tract: ", data_plot_fs_sf$NAMELSAD, "<br/>"
+    ) %>% 
+      lapply(htmltools::HTML) 
+  ) %>%
+  addPolylines(data = shape_counties_dmv, color = "black", opacity = 1, weight = 2.5) 
+
+map_food_secure
+
+```
+
+<br>
+<br>
+
+## Food Insecure Households
+
+```{r, echo=FALSE, warning=FALSE, fig.width = 10, fig.height= 10}
+library(sf)
+library(leaflet)
+library(dplyr)
+library(readr)
+
+
+
+#format st
+data_plot_fi_sf <- st_as_sf(data_plot_fi) # %>% filter(tot_hh > 10)
+
+#palette colors
+pal <- colorBin("viridis", data_plot_fi_sf$total_hh, bins = 10)
+
+
+# map
+map_food_insecure <- leaflet(data_plot_fi_sf , options = leafletOptions(attributionControl = FALSE)) %>%
+  addTiles() %>%
+  addScaleBar("bottomleft") %>%
+  addControl("Food Insecure households", "topright") %>%
+  addLegend("bottomright", pal, data_plot_fi_sf$total_hh, opacity = .7) %>%
+  addPolygons(
+    fillColor = pal(data_plot_fi_sf$total_hh), fillOpacity = .7, weight = 1, color = "#000",
+    highlightOptions = highlightOptions(color = "#fff"),
+    label = paste0(
+      "Number of Food Insecure households:", data_plot_fi_sf$total_hh ,  "<br/>", 
+      "Census tract: ", data_plot_fi_sf$NAMELSAD, "<br/>"
+    ) %>% 
+      lapply(htmltools::HTML) 
+  ) %>%
+  addPolylines(data = shape_counties_dmv, color = "black", opacity = 1, weight = 2.5) 
+
+map_food_insecure
+
+```
+
+
+
+
+
+
+

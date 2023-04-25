@@ -1,6 +1,6 @@
 ---
 title: "Cost of Living Estimates"
-subtitle: "Examples for census tracts in the National Capital Region."
+subtitle: Examples for census tracts in the National Capital Region.
 ---
 
 <br>

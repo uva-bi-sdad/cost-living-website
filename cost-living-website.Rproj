@@ -16,4 +16,4 @@ AutoAppendNewline: Yes
 StripTrailingWhitespace: Yes
 
 BuildType: Website
-WebsitePath: /Users/cesarmontalvo/Documents/R/git/cost-living-website/code/web
+WebsitePath: code/web
