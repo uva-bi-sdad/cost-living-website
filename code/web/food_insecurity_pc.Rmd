@@ -1,6 +1,5 @@
 ---
-title: "proportion of households facing food insecurity in the NCR Region "
-
+title: 'proportion of households facing food insecurity in the NCR Region '
 ---
 
 
@@ -92,25 +91,26 @@ data_plot$geometry <- st_cast(data_plot$geometry,"MULTIPOLYGON")
 
 
 
-```{r, echo=FALSE, warning=FALSE}
+```{r, echo=FALSE, warning=FALSE, fig.width = 11, fig.height= 7}
 
 library(ggiraph)
 
 # Create plot for proportion of households facing food insecurity with tooltips
 plot_numhh_finsec <- ggplot(data_plot, aes(tot_hh, insecure_pc, fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME, "<br>", "Food Insecurity: ", insecure_pc, "%"))) + 
   geom_point_interactive(color = "black", size = 2, shape = 20, aes(data_id = GEOID)) +
-  scale_fill_distiller(palette = "Blues", direction = 1) + 
+  scale_fill_viridis(option = "viridis", direction = 1) + 
   labs(title = 'Food Insecurity and Number of Households by Census Tracts in NCR Region', 
         x = "Number of Households", 
        y = "Proportion of Households Facing Food Insecurity") + 
-  theme(legend.text = element_text(size = 10), 
+  theme(legend.text = element_text(size = 14), 
         legend.position = "bottom") +
 guides(fill = FALSE) 
+
 
 # Create plot for choropleth map with tooltips
 c <- ggplot(data_plot, aes(fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME, "<br>", "Food Insecurity: ", insecure_pc, "%"), geometry = geometry )) +
   geom_sf_interactive(aes(data_id = GEOID)) + 
-  scale_fill_gradient(low = "white", high = "#4B9CD3") +
+  scale_fill_viridis(option = "viridis", direction = 1) + 
   theme_void() + 
   guides(fill = guide_legend(title = "Food Insecurity %", title.position = "top", 
                              label.position = "bottom", label.theme = element_text(size = 8)))
@@ -125,3 +125,180 @@ girafe(ggobj = plot_numhh_finsec + c) %>%
 
 
 
+
+
+```{r, echo=FALSE, warning=FALSE, include=FALSE}
+#counties geometry
+shape_counties <- tigris::counties(state = c("VA", "MD", "DC"), class = "sf")
+shape_counties_dmv <- shape_counties %>% filter(GEOID == 51013 | GEOID ==51059 | GEOID == 51600 | GEOID == 51107 | GEOID == 51610 | GEOID == 51683 | 
+                                                  GEOID == 51685 | GEOID == 51153 | GEOID == 51510 | GEOID == 11001 | GEOID ==  24021 | GEOID == 24031 | GEOID == 24033 | GEOID == 24017
+                                                ) 
+#format for counties
+shape_counties_dmv <- st_transform(shape_counties_dmv, 4326 )
+
+
+```
+
+
+
+```{r}
+counties <- tigris::counties(state = c("VA", "MD", "DC"), class = "sf")
+
+shape_counties_dmv <- counties %>% filter(GEOID == 51013 | GEOID ==51059 | GEOID == 51600 | GEOID == 51107 | GEOID == 51610 | GEOID == 51683 | 
+                                                  GEOID == 51685 | GEOID == 51153 | GEOID == 51510 | GEOID == 11001 | GEOID ==  24021 | GEOID == 24031 | GEOID == 24033 | GEOID == 24017
+                                                ) 
+ggplot() +
+  geom_sf(data = shape_counties_dmv) + 
+  theme_void()
+```
+
+
+```{r}
+counties <- tigris::counties("VA", cb = T)
+
+neighborhood_sf <- counties %>%
+  filter(NAME == "Fairfax" | NAME == "Alexandria" | NAME == "Arlington" | NAME == "Falls Church")
+
+ggplot() +
+  geom_sf(data = neighborhood_sf) + 
+  theme_void()
+```
+
+
+
+
+
+```{r, echo=FALSE, warning=FALSE, fig.width = 11, fig.height= 7}
+
+
+# Create plot for proportion of households facing food insecurity with tooltips
+plot_numhh_finsec <- ggplot(data_plot, aes(tot_hh, insecure_pc, fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME, "<br>", "Food Insecurity: ", insecure_pc, "%"))) + 
+  geom_point_interactive(color = "black", size = 2, shape = 20, aes(data_id = GEOID)) +
+  scale_fill_viridis(option = "viridis", direction = 1) + 
+  labs(title = 'Food Insecurity and Number of Households by Census Tracts in NCR Region', 
+        x = "Number of Households", 
+       y = "Proportion of Households Facing Food Insecurity") + 
+  theme(legend.text = element_text(size = 14), 
+        legend.position = "bottom") +
+guides(fill = FALSE) 
+
+# Create plot for choropleth map with tooltips
+c <- ggplot(data_plot, aes(fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME, "<br>", "Food Insecurity: ", insecure_pc, "%"), geometry = geometry )) +
+  geom_sf_interactive(aes(data_id = GEOID)) + 
+  scale_fill_viridis(option = "viridis", direction = 1) + 
+  theme_void() + 
+  guides(fill = guide_legend(title = "Food Insecurity %", title.position = "top", 
+                             label.position = "bottom", label.theme = element_text(size = 8)))+
+  geom_sf(data = shape_counties_dmv, color = "black", fill = NA)
+
+# Combine plots using girafe
+girafe(ggobj = plot_numhh_finsec + c) %>%
+  girafe_options(opts_hover(css = "fill:cyan;")) 
+
+
+```
+
+
+
+```{r}
+#counties geometry
+shape_counties <- tigris::counties(state = c("VA", "MD", "DC"), class = "sf")
+shape_counties_dmv <- shape_counties %>% filter(GEOID == 51013 | GEOID ==51059 | GEOID == 51600 | GEOID == 51107 | GEOID == 51610 | GEOID == 51683 | 
+                                                  GEOID == 51685 | GEOID == 51153 | GEOID == 51510 | GEOID == 11001 | GEOID ==  24021 | GEOID == 24031 | GEOID == 24033 | GEOID == 24017
+                                                ) 
+#format for counties
+#shape_counties_dmv <- st_transform(shape_counties_dmv, 4326 )
+ggplot() +
+  geom_sf(data = shape_counties_dmv) + 
+  theme_void()
+
+
+ myplot <- ggplot() +
+  geom_sf(data = shape_counties_dmv, fill = NA, color = "black") +
+  theme_void()
+```
+
+
+
+
+
+
+
+```{r}
+# Create plot for proportion of households facing food insecurity with tooltips
+plot_numhh_finsec <- ggplot(data_plot, aes(tot_hh, insecure_pc, fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME, "<br>", "Food Insecurity: ", insecure_pc, "%"))) + 
+  geom_point_interactive(color = "black", size = 2, shape = 20, aes(data_id = GEOID)) +
+  scale_fill_viridis(option = "viridis", direction = 1) + 
+  labs(title = 'Food Insecurity and Number of Households by Census Tracts in NCR Region', 
+        x = "Number of Households", 
+       y = "Proportion of Households Facing Food Insecurity") + 
+  theme(legend.text = element_text(size = 14), 
+        legend.position = "bottom") +
+guides(fill = FALSE) 
+
+# Create plot for choropleth map with tooltips
+c <- ggplot(data_plot, aes(fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME, "<br>", "Food Insecurity: ", insecure_pc, "%" )))+ 
+  geom_sf_interactive(aes(data_id = GEOID), data = shape_counties_dmv) + 
+  scale_fill_viridis(option = "viridis", direction = 1) + 
+  theme_void() + 
+  guides(fill = guide_legend(title = "Food Insecurity %", title.position = "top", 
+                             label.position = "bottom", label.theme = element_text(size = 8)))
+
+c <- c +
+     geom_sf(data = c(shape_counties_dmv,data_plot), fill=NA, color="black")
+
+# Combine plots using girafe
+girafe(ggobj = plot_numhh_finsec + c) %>%
+  girafe_options(opts_hover(css = "fill:cyan;")) 
+
+```
+
+
+
+```{r}
+
+
+df1 <- data_plot
+df2 <- shape_counties_dmv
+df1_sf <- st_as_sf(df1)
+df2_sf <- st_as_sf(df2)
+
+df1_sf$county_id <- substr(df1_sf$GEOID, 1, 5)
+
+
+merged_sf <- st_join(df1_sf, df2_sf, join = st_intersects)
+
+```
+
+
+```{r, echo=FALSE, warning=FALSE, fig.width = 11, fig.height= 7}
+library(ggiraph)
+
+# Create plot for proportion of households facing food insecurity with tooltips
+plot_numhh_finsec <- ggplot(merged_sf, aes(tot_hh, insecure_pc, fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME.x, "<br>", "Food Insecurity: ", insecure_pc, "%"))) + 
+  geom_point_interactive(color = "black", size = 2, shape = 20, aes(data_id = GEOID.x)) +
+  scale_fill_viridis(option = "viridis", direction = 1) + 
+  labs(title = 'Food Insecurity and Number of Households by Census Tracts in NCR Region', 
+        x = "Number of Households", 
+       y = "Proportion of Households Facing Food Insecurity") + 
+  theme(legend.text = element_text(size = 14), 
+        legend.position = "bottom") +
+guides(fill = FALSE) 
+
+
+# Create plot for choropleth map with tooltips
+c <- ggplot(merged_sf, aes(fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME.x, "<br>", "Food Insecurity: ", insecure_pc, "%"), geometry = geometry )) +
+  geom_sf_interactive(aes(data_id = GEOID.x)) + 
+  scale_fill_viridis(option = "viridis", direction = 1) + 
+  theme_void() + 
+  guides(fill = guide_legend(title = "Food Insecurity %", title.position = "top", 
+                             label.position = "bottom", label.theme = element_text(size = 8)))+
+
+  geom_sf_interactive(data = merged_sf, fill = NA, color = "black", opacity = 1, weight = 2.5)  # add county borders
+
+
+# Combine plots using girafe
+girafe(ggobj = plot_numhh_finsec + c) %>%
+  girafe_options(opts_hover(css = "fill:cyan;")) 
+
+```
