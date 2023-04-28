@@ -96,7 +96,7 @@ data_plot$geometry <- st_cast(data_plot$geometry,"MULTIPOLYGON")
 library(ggiraph)
 
 # Create plot for proportion of households facing food insecurity with tooltips
-plot_numhh_finsec <- ggplot(data_plot, aes(tot_hh, insecure_pc, fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME, "<br>", "Food Insecurity: ", insecure_pc, "%"))) + 
+plot_numhh_finsec <- ggplot(data_plot, aes(tot_hh, insecure_pc, fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME, "<br>", "Food Insecurity: ", round(insecure_pc,2)))) + 
   geom_point_interactive(color = "black", size = 2, shape = 20, aes(data_id = GEOID)) +
   scale_fill_viridis(option = "viridis", direction = 1) + 
   labs(title = 'Food Insecurity and Number of Households by Census Tracts in NCR Region', 
@@ -108,7 +108,7 @@ guides(fill = FALSE)
 
 
 # Create plot for choropleth map with tooltips
-c <- ggplot(data_plot, aes(fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME, "<br>", "Food Insecurity: ", insecure_pc, "%"), geometry = geometry )) +
+c <- ggplot(data_plot, aes(fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME, "<br>", "Food Insecurity: ", round(insecure_pc,2) ), geometry = geometry )) +
   geom_sf_interactive(aes(data_id = GEOID)) + 
   scale_fill_viridis(option = "viridis", direction = 1) + 
   theme_void() + 

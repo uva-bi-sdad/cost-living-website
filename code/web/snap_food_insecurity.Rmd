@@ -14,6 +14,29 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tigris)
 library(dplyr)
 library(stars)
+library(viridis) 
+library(ggiraph)
+library(plotly)
+library(sf)
+library(dplyr)
+library(ggplot2)
+library(tidycensus)
+library(tidyverse)
+library(patchwork)
+library(ggiraph)
+library(scales)
+library(googleway)
+library(sf)
+library(spdep)
+library(leaflet)
+library(gt)
+library(acs)
+library(tigris)
+library(shiny)
+library(viridis)
+library(ggupset)
+library(ggrepel)
+library(ggmap)
 ```
 
 
@@ -40,6 +63,9 @@ colnames(data)[1] <- "GEOID"
 
 data_plot <- left_join(tracts_county, data, by = "GEOID")
 
+#create a new column for snap_households from snap eligibility proportion and total households
+data_plot$SNAP_households <- data_plot$households_represented * data_plot$SNAP_eligibility_proportion
+
 #counties geometry
 shape_counties <- tigris::counties(state = c("VA", "MD", "DC"), class = "sf")
 shape_counties_dmv <- shape_counties %>% filter(GEOID == 51013 | GEOID ==51059 | GEOID == 51600 | GEOID == 51107 | GEOID == 51610 | GEOID == 51683 | 
@@ -49,6 +75,10 @@ shape_counties_dmv <- shape_counties %>% filter(GEOID == 51013 | GEOID ==51059 |
 shape_counties_dmv <- st_transform(shape_counties_dmv, 4326 )
 
 ```
+
+
+
+
 
 
 
@@ -65,19 +95,19 @@ library(readr)
 data_plot_sf <- st_as_sf(data_plot) # %>% filter(tot_hh > 10)
 
 #palette colors
-pal <- colorBin("viridis", data_plot_sf$households_represented, bins = 10)
+pal <- colorBin("viridis", data_plot_sf$SNAP_households, bins = 10)
 
 # map
 map_snap_hh <- leaflet(data_plot_sf , options = leafletOptions(attributionControl = FALSE)) %>%
   addTiles() %>%
   addScaleBar("bottomleft") %>%
   addControl("NUMBER OF HOUSEHOLDS RECEIVING SNAP BY COUNTY", "topright") %>%
-  addLegend("bottomright", pal, data_plot_sf$households_represented, opacity = .7) %>%
+  addLegend("bottomright", pal, data_plot_sf$SNAP_households, opacity = .7) %>%
   addPolygons(
-    fillColor = pal(data_plot_sf$households_represented), fillOpacity = .7, weight = 1, color = "#000",
+    fillColor = pal(data_plot_sf$SNAP_households), fillOpacity = .7, weight = 1, color = "#000",
     highlightOptions = highlightOptions(color = "#fff"),
     label = paste0(
-      "Number of Snap households:", data_plot_sf$households_represented ,  "<br/>", 
+      "Number of Snap households:", round(data_plot_sf$SNAP_households,1) ,  "<br/>", 
       "Census tract: ", data_plot_sf$NAMELSAD, "<br/>",
       "Monthly mean income: ", round(data_plot_sf$monthly_mean_income, 1), "<br/>",
       "Monthly mean snap benefit: ", round(data_plot_sf$monthly_mean_SNAP_benefit,1), "<br/>"
@@ -147,14 +177,18 @@ food_sec_tract_num$geoid <- as.character(food_sec_tract_num$geoid)
 food_sec_tract_num <- rename(food_sec_tract_num, GEOID = geoid)
 food_sec_tract_num <- select(food_sec_tract_num, -c("NA"))
 
-data_plot <- left_join(tracts_county, food_sec_tract_num, by = "GEOID")
+data_plot_1 <- left_join(tracts_county, food_sec_tract_num, by = "GEOID")
 
-data_plot$geometry <- st_cast(data_plot$geometry,"MULTIPOLYGON")
+data_plot_1$geometry <- st_cast(data_plot_1$geometry,"MULTIPOLYGON")
 
-data <- read.csv("~/git/cost-living/code/food_insecurity/2.results_snap_snap_max/results/ncr_combined_2022_SNAP_by_tract.csv")
+data_1 <- read.csv("~/git/cost-living/code/food_insecurity/2.results_snap_snap_max/results/ncr_combined_2022_SNAP_by_tract.csv")
 
-colnames(data)[1] <- "GEOID"
-merged_data <- merge(data, data_plot, by = "GEOID")
+#creating column for snap households
+data_1$SNAP_households <- data_1$households_represented * data_1$SNAP_eligibility_proportion
+
+
+colnames(data_1)[1] <- "GEOID"
+merged_data <- merge(data_1, data_plot_1, by = "GEOID")
 merged_data$geometry <- st_cast(merged_data$geometry,"MULTIPOLYGON")
 
 
@@ -166,17 +200,13 @@ merged_data$geometry <- st_cast(merged_data$geometry,"MULTIPOLYGON")
 
 
 
-
-
-
 ```{r, echo=FALSE, warning=FALSE, fig.width = 11, fig.height= 7}
 
 
-library(ggiraph)
 
 
 # Create plot for proportion of households facing food insecurity with tooltips
-plot_snap_finsec <- ggplot(merged_data, aes(households_represented, insecure_pc, fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME, "<br>", "Food Insecurity: ", insecure_pc, "%","<br>", "Number of households: ", households_represented, "<br>"))) + 
+plot_snap_finsec <- ggplot(merged_data, aes(SNAP_households, insecure_pc, fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME, "<br>", "Food Insecurity: ", round(insecure_pc,2),"<br>", "Number of SNAP households: ", round(SNAP_households,1), "<br>"))) + 
   geom_point_interactive(color = "black", size = 2, shape = 20, aes(data_id = GEOID)) +
   scale_fill_viridis(option = "viridis", direction = 1) + 
   labs(title = 'Food Insecurity and Number of SNAP Households by Census Tracts in NCR Region', 
@@ -188,20 +218,23 @@ guides(fill = FALSE)
 
 
 # Create plot for choropleth map with tooltips
-c <- ggplot(merged_data, aes(fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME, "<br>", "Food Insecurity: ", insecure_pc, "%","<br>", "Number of households: ", households_represented, "<br>"), geometry = geometry )) +
+c <- ggplot(merged_data, aes(fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME, "<br>", "Food Insecurity: ", round(insecure_pc,2),"<br>", "Number of SNAP households: ", round(SNAP_households,1), "<br>"), geometry = geometry )) +
   geom_sf_interactive(aes(data_id = GEOID)) + 
   scale_fill_viridis(option = "viridis", direction = 1) + 
   theme_void() + 
-  guides(fill = guide_legend(title = "Food Insecurity %", title.position = "top", 
+  guides(fill = guide_legend(title = "Food Insecurity", title.position = "top", 
                              label.position = "bottom", label.theme = element_text(size = 8)))
 
 # Combine plots using girafe
 girafe(ggobj = plot_snap_finsec + c) %>%
-  girafe_options(opts_hover(css = "fill:cyan;")) 
+  girafe_options(opts_hover(css = "fill:cyan;"))
 
 
 
 ```
+
+
+
 
 
 
