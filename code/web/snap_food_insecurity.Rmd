@@ -1,8 +1,5 @@
 ---
-title: "Untitled"
-author: "Kishore"
-date: "4/27/2023"
-output: html_document
+title: "SNAP and Food Insecurity"
 ---
 
 ```{r setup, include=FALSE}
@@ -80,7 +77,10 @@ shape_counties_dmv <- st_transform(shape_counties_dmv, 4326 )
 
 
 
+<br>
+<br>
 
+## Number of Households receving SNAP by tract in NCR Region
 
 
 
@@ -101,7 +101,7 @@ pal <- colorBin("viridis", data_plot_sf$SNAP_households, bins = 10)
 map_snap_hh <- leaflet(data_plot_sf , options = leafletOptions(attributionControl = FALSE)) %>%
   addTiles() %>%
   addScaleBar("bottomleft") %>%
-  addControl("NUMBER OF HOUSEHOLDS RECEIVING SNAP BY COUNTY", "topright") %>%
+  addControl("HOUSEHOLDS RECEIVING SNAP", "topright") %>%
   addLegend("bottomright", pal, data_plot_sf$SNAP_households, opacity = .7) %>%
   addPolygons(
     fillColor = pal(data_plot_sf$SNAP_households), fillOpacity = .7, weight = 1, color = "#000",
@@ -198,26 +198,29 @@ merged_data$geometry <- st_cast(merged_data$geometry,"MULTIPOLYGON")
 
 
 
+<br>
+<br>
 
+## Food Insecurity proportion vs Number of households receiving SNAP by tract in NCR region
 
 ```{r, echo=FALSE, warning=FALSE, fig.width = 11, fig.height= 7}
 
 
 
 
-# Create plot for proportion of households facing food insecurity with tooltips
+# Create plot for proportion of households facing food insecurity 
 plot_snap_finsec <- ggplot(merged_data, aes(SNAP_households, insecure_pc, fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME, "<br>", "Food Insecurity: ", round(insecure_pc,2),"<br>", "Number of SNAP households: ", round(SNAP_households,1), "<br>"))) + 
   geom_point_interactive(color = "black", size = 2, shape = 20, aes(data_id = GEOID)) +
   scale_fill_viridis(option = "viridis", direction = 1) + 
-  labs(title = 'Food Insecurity and Number of SNAP Households by Census Tracts in NCR Region', 
+  labs(title = '', 
         x = "Number of SNAP Households", 
        y = "Proportion of Households Facing Food Insecurity") + 
-  theme(legend.text = element_text(size = 14), 
+  theme(legend.text = element_text(size = 18), 
         legend.position = "bottom") +
 guides(fill = FALSE) 
 
 
-# Create plot for choropleth map with tooltips
+# Create plot for choropleth map 
 c <- ggplot(merged_data, aes(fill = insecure_pc, tooltip = paste0("Census Tract: ", NAME, "<br>", "Food Insecurity: ", round(insecure_pc,2),"<br>", "Number of SNAP households: ", round(SNAP_households,1), "<br>"), geometry = geometry )) +
   geom_sf_interactive(aes(data_id = GEOID)) + 
   scale_fill_viridis(option = "viridis", direction = 1) + 
@@ -242,5 +245,19 @@ girafe(ggobj = plot_snap_finsec + c) %>%
 
 
 
+
+
+
+
+
+
+
+```{r}
+library(tmap)
+data("World")
+
+tm_shape(World) +
+    tm_polygons("HPI")
+```
 
 

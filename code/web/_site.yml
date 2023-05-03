@@ -18,6 +18,8 @@ navbar:
       href: cost_estimation.html
     - text: "Food insecurity"
       href: food_insecurity_pc.html
+    - text: "Food insecure,Food secure,At-risk"
+      href:  food_secure_insecure_risk.html
     - text: ""
       icon: fa-github
       href: "https://github.com/uva-bi-sdad"
