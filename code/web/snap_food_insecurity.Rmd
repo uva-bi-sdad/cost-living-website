@@ -196,6 +196,35 @@ merged_data$geometry <- st_cast(merged_data$geometry,"MULTIPOLYGON")
 
 
 
+```{r}
+library(ggplot2)
+library(plotly)
+library(viridis)
+
+# Create scatterplot using ggplot2
+p <- ggplot(data_plot, aes(x = insecure_pc, y = tot_hh, text = NAMELSAD, color = insecure_pc)) +
+  geom_point() +
+  labs(x = "Proportion of Households Facing Food Insecurity", y = "Total Households") +
+  theme_minimal() +
+  scale_color_viridis(name = "Proportion of Households Facing Food Insecurity",
+                      option = "viridis")
+
+# Convert ggplot object to plotly object
+p <- ggplotly(p)
+
+# Customize the plotly object
+p <- p %>%
+  layout(title = "Food Insecurity Scatterplot",
+         xaxis = list(title = "Proportion of Households Facing Food Insecurity"),
+         yaxis = list(title = "Total Households"),
+         hoverlabel = list(bgcolor = "white", font = list(size = 12)),
+         hovermode = "closest")
+
+# Show the plot
+p
+
+
+```
 
 
 <br>

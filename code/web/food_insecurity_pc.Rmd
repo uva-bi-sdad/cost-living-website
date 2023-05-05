@@ -177,6 +177,50 @@ MAP_FI_HH
 
 
 
+##
+
+<br>
+<br>
+
+## Proportion of Households facing Food Insecurity
+
+
+
+
+
+
+```{r,echo=FALSE, warning=FALSE}
+# Change the column name to 'Food_insecure'
+colnames(data_plot)[colnames(data_plot) == 'Food Insecure'] <- 'Food_insecure'
+
+# Create scatterplot using ggplot2
+p <- ggplot(data_plot, aes(x = tot_hh, y = insecure_pc, text = paste("Census Tract: ", NAME, "<br>Food insecurity percentage: ", sprintf("%.2f", insecure_pc), "<br>Total Households: ", tot_hh, "<br>Food Insecure households: ", Food_insecure), color = insecure_pc)) +
+  geom_point() +
+  labs(x = "Total Households", y = "Food insecurity percentage") +
+  theme_minimal() +
+  scale_color_viridis(name = "Food insecurity percentage",
+                      option = "viridis")
+
+# Convert ggplot object to plotly object
+p <- ggplotly(p, tooltip = "text", dynamicTicks = TRUE)
+
+# Customize the plotly object
+p <- p %>%
+  layout(title = "",
+         xaxis = list(title = "Total Households"),
+         yaxis = list(title = "Food insecurity percentage"),
+         hoverlabel = list(bgcolor = "white", font = list(size = 12)),
+         hovermode = "closest",
+         width = 950, height = 500,
+         coloraxis = list(colorscale = "Viridis", colorbar = list(title = "Food insecurity percentage")))
+
+# Show the plot
+p
+
+```
+
+
+
 
 
 
